@@ -1,4 +1,12 @@
-/bin/
-/gen/
-/libs/
-/.settings/
+/app/build/
+/build/
+/import-summary.txt
+.gradle
+/local.properties
+.DS_Store
+
+## Directory-based project format:
+.idea/
+
+## IntelliJ config files
+*.iml
