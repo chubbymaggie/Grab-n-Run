@@ -4,18 +4,18 @@ apply plugin: 'maven'
 ext {
     PUBLISH_GROUP_ID = 'it.necst.grabnrun'
     PUBLISH_ARTIFACT_ID = 'grabnrun'
-    PUBLISH_VERSION = '1.0.2'
+    PUBLISH_VERSION = '1.0.4'
 }
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 5
+        versionName "1.0.4"
 
     }
 
@@ -25,10 +25,31 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
     }
+
+    sourceSets {
+
+        androidTest {
+            java.srcDirs = ['test/java']
+        }
+    }
+
+    // Used to avoid unit tests to fail when encountering a static
+    // Android method not mocked.
+    // See: http://g.co/androidstudio/not-mocked
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile group: 'com.google.guava', name: 'guava', version: '18.0'
+
+    // Unit testing dependencies
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    testCompile 'org.hamcrest:hamcrest-library:1.1'
+    testCompile "org.robolectric:robolectric:3.0"
 }
 
 def groupId = project.PUBLISH_GROUP_ID
